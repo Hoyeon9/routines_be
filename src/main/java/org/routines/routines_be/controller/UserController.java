@@ -2,6 +2,7 @@ package org.routines.routines_be.controller;
 
 import org.routines.routines_be.dto.LoginRequestDTO;
 import org.routines.routines_be.dto.LoginResponseDTO;
+import org.routines.routines_be.dto.RegisterRequestDTO;
 import org.routines.routines_be.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,5 +16,9 @@ public class UserController {
     @PostMapping("/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO loginRequest) {
         return userService.login(loginRequest);
+    }
+    @PostMapping("/register")
+    public void register(@RequestBody RegisterRequestDTO registerRequest) {
+        userService.register(registerRequest);
     }
 }

@@ -2,6 +2,7 @@ package org.routines.routines_be.service;
 
 import org.routines.routines_be.dto.LoginRequestDTO;
 import org.routines.routines_be.dto.LoginResponseDTO;
+import org.routines.routines_be.dto.RegisterRequestDTO;
 import org.routines.routines_be.entity.User;
 import org.routines.routines_be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserService {
     public LoginResponseDTO login(LoginRequestDTO loginRequest) {
         User user = userRepository.findByUserId(loginRequest.getUserId());
 
-        if (user != null && user.getUserPassword().equals(loginRequest.getPassword())) {
+        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
             // For simplicity, plain password check. Use hashed password comparison in production.
             LoginResponseDTO response = new LoginResponseDTO();
             response.setMessage("Login successful!");
@@ -28,14 +29,22 @@ public class UserService {
         }
     }
 
+    public void register(RegisterRequestDTO registerRequest) {
+        if(userRepository.findByUserId(registerRequest.getUserId()) == null && userRepository.findByEmail(registerRequest.getEmail()) == null) {
+            User user = new User();
+            user.setUserId(registerRequest.getUserId());
+            user.setEmail(registerRequest.getEmail());
+            user.setPassword(registerRequest.getPassword());
+            user.setUsername(registerRequest.getUsername());
+            userRepository.save(user);
+        }
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
-    }
-    public User createUser(User user) {
-        return userRepository.save(user);
     }
     public User updateUser(Long id, User user) {
         userRepository.deleteById(id);

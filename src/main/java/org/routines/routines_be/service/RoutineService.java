@@ -13,6 +13,6 @@ public class RoutineService {
     private RoutineRepository routineRepository;
 
     public List<Routine> getAllRoutines(String userId) {
-        return routineRepository.findByUserId(userId);
+        return routineRepository.findByUserIdRoutine(userId);
     }
 }

@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface RoutineRepository extends CrudRepository<Routine, Long> {
-    List<Routine> findByUserId(String userId);
+    List<Routine> findByUserIdRoutine(String userIdRoutine);
 }

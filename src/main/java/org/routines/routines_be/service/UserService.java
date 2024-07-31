@@ -43,8 +43,8 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public User getUserByUserId(String userId) {
+        return userRepository.findByUserId(userId);
     }
     public User updateUser(Long id, User user) {
         userRepository.deleteById(id);

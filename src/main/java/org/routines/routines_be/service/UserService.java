@@ -1,5 +1,6 @@
 package org.routines.routines_be.service;
 
+import jakarta.transaction.Transactional;
 import org.routines.routines_be.dto.LoginRequestDTO;
 import org.routines.routines_be.dto.LoginResponseDTO;
 import org.routines.routines_be.dto.RegisterRequestDTO;
@@ -46,11 +47,11 @@ public class UserService {
     public User getUserByUserId(String userId) {
         return userRepository.findByUserId(userId);
     }
-    public User updateUser(Long id, User user) {
-        userRepository.deleteById(id);
-        return userRepository.save(user);
+    public void updateUser(RegisterRequestDTO registerRequest) {
+        userRepository.updateByUserId(registerRequest.getUserId(), registerRequest.getPassword(), registerRequest.getUsername(), registerRequest.getEmail());
     }
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    @Transactional
+    public void deleteUser(String userId) {
+        userRepository.deleteByUserId(userId);
     }
 }

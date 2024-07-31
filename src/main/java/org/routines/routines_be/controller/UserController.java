@@ -29,4 +29,8 @@ public class UserController {
         responseDTO.setEmail(user.getEmail());
         return responseDTO;
     }
+    @PutMapping
+    public void updateUserInfo(@RequestBody RegisterRequestDTO registerRequest) {
+        userService.updateUser(registerRequest);
+    }
 }

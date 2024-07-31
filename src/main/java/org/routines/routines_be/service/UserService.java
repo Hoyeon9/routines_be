@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.routines.routines_be.dto.LoginRequestDTO;
 import org.routines.routines_be.dto.LoginResponseDTO;
 import org.routines.routines_be.dto.RegisterRequestDTO;
+import org.routines.routines_be.dto.UserIdDTO;
 import org.routines.routines_be.entity.User;
 import org.routines.routines_be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class UserService {
         userRepository.updateByUserId(registerRequest.getUserId(), registerRequest.getPassword(), registerRequest.getUsername(), registerRequest.getEmail());
     }
     @Transactional
-    public void deleteUser(String userId) {
-        userRepository.deleteByUserId(userId);
+    public void deleteUser(UserIdDTO userId) {
+        userRepository.deleteByUserId(userId.getUserId());
     }
 }

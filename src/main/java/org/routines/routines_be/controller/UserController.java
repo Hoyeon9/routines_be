@@ -33,4 +33,8 @@ public class UserController {
     public void updateUserInfo(@RequestBody RegisterRequestDTO registerRequest) {
         userService.updateUser(registerRequest);
     }
+    @DeleteMapping
+    public void deleteUser(@RequestBody UserIdDTO userId) {
+        userService.deleteUser(userId);
+    }
 }

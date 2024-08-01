@@ -24,4 +24,10 @@ public class RoutineService {
         routineRepository.save(routine);
     }
 
+    public void updateRoutine(RoutineRequestDTO routineRequest) {
+        if(routineRequest.getUserId().equals(routineRepository.findByRoutineId(routineRequest.getRoutineId()).getUserIdRoutine())){
+            routineRepository.updateByRoutineId(routineRequest.getRoutineId(), routineRequest.getRoutineName(), routineRequest.getRoutineDesc());
+        }
+    }
+
 }

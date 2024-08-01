@@ -11,6 +11,7 @@ import java.util.List;
 public interface RoutineRepository extends CrudRepository<Routine, Long> {
     List<Routine> findByUserIdRoutine(String userIdRoutine);
     Routine findByRoutineId(long routineId);
+    void deleteByRoutineId(long routineId);
 
     @Modifying
     @Transactional

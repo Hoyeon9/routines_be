@@ -1,5 +1,6 @@
 package org.routines.routines_be.service;
 
+import jakarta.transaction.Transactional;
 import org.routines.routines_be.dto.RoutineRequestDTO;
 import org.routines.routines_be.entity.Routine;
 import org.routines.routines_be.repository.RoutineRepository;
@@ -27,6 +28,12 @@ public class RoutineService {
     public void updateRoutine(RoutineRequestDTO routineRequest) {
         if(routineRequest.getUserId().equals(routineRepository.findByRoutineId(routineRequest.getRoutineId()).getUserIdRoutine())){
             routineRepository.updateByRoutineId(routineRequest.getRoutineId(), routineRequest.getRoutineName(), routineRequest.getRoutineDesc());
+        }
+    }
+    @Transactional
+    public void deleteRoutine(RoutineRequestDTO routineRequest) {
+        if(routineRequest.getUserId().equals(routineRepository.findByRoutineId(routineRequest.getRoutineId()).getUserIdRoutine())){
+            routineRepository.deleteByRoutineId(routineRequest.getRoutineId());
         }
     }
 

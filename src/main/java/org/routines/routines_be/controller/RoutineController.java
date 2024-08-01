@@ -29,9 +29,12 @@ public class RoutineController {
     public void post(@RequestBody RoutineRequestDTO routineRequest) {
         routineService.saveRoutine(routineRequest);
     }
-
     @PutMapping
     public void put(@RequestBody RoutineRequestDTO routineRequest) {
         routineService.updateRoutine(routineRequest);
+    }
+    @DeleteMapping
+    public void delete(@RequestBody RoutineRequestDTO routineRequest) {
+        routineService.deleteRoutine(routineRequest);
     }
 }

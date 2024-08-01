@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoutineRepository extends CrudRepository<Routine, Long> {
     List<Routine> findByUserIdRoutine(String userIdRoutine);
+    Routine findByRoutineId(Long routineId);
 }

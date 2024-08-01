@@ -21,8 +21,8 @@ public class UserController {
         userService.register(registerRequest);
     }
     @GetMapping
-    public UserResponseDTO getUserInfo(@RequestBody UserIdDTO userId){
-        User user = userService.getUserByUserId(userId.getUserId());
+    public UserResponseDTO getUserInfo(@RequestParam String userId){
+        User user = userService.getUserByUserId(userId);
         UserResponseDTO responseDTO = new UserResponseDTO();
         responseDTO.setUserId(user.getUserId());
         responseDTO.setUsername(user.getUsername());

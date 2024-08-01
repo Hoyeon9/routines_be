@@ -21,8 +21,8 @@ public class RoutineController {
     }
 
     @GetMapping("/all")
-    public List<Routine> getAll(@RequestBody UserIdDTO userId) {
-        return routineService.getAllRoutines(userId.getUserId());
+    public List<Routine> getAll(@RequestParam String userId) {
+        return routineService.getAllRoutines(userId);
     }
 
     @PostMapping

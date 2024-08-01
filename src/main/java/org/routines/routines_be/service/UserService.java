@@ -25,6 +25,7 @@ public class UserService {
             // For simplicity, plain password check. Use hashed password comparison in production.
             LoginResponseDTO response = new LoginResponseDTO();
             response.setMessage("Login successful!");
+            response.setToken(loginRequest.getUserId());
             return response;
         } else {
             throw new RuntimeException("Invalid id or password.");

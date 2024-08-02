@@ -5,7 +5,9 @@ import org.routines.routines_be.dto.LoginRequestDTO;
 import org.routines.routines_be.dto.LoginResponseDTO;
 import org.routines.routines_be.dto.RegisterRequestDTO;
 import org.routines.routines_be.dto.UserIdDTO;
+import org.routines.routines_be.entity.Routine;
 import org.routines.routines_be.entity.User;
+import org.routines.routines_be.repository.RoutineRepository;
 import org.routines.routines_be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import java.util.List;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoutineRepository routineRepository;
 
     public LoginResponseDTO login(LoginRequestDTO loginRequest) {
         User user = userRepository.findByUserId(loginRequest.getUserId());
@@ -53,6 +57,12 @@ public class UserService {
     }
     @Transactional
     public void deleteUser(UserIdDTO userId) {
+        List<Routine> restRoutines = routineRepository.findByUserIdRoutine(userId.getUserId());
+        if(!restRoutines.isEmpty()) {
+            for(Routine r : restRoutines) {
+                routineRepository.deleteByRoutineId(r.getRoutineId());
+            }
+        }
         userRepository.deleteByUserId(userId.getUserId());
     }
 }
